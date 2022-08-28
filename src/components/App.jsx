@@ -53,7 +53,7 @@ export const App = () => {
          {isOpen && <Modal idContact={idContact} onClose={seIisOpen}></Modal>}
            
          <Routes>
-            <Route path="/login" element={<PublicRouter restricted><SignIn  /></PublicRouter>}></Route>
+            <Route path="/" element={<PublicRouter restricted><SignIn  /></PublicRouter>}></Route>
              <Route path="/register" element={<PublicRouter restricted><Register /></PublicRouter>}></Route>
             <Route path="/contacts" element={<PrivateRouter><ContactsList isOpen={seIisOpen} setIdContact={setIdContact} /></PrivateRouter>}> </Route>
             <Route path='/create' element={<PrivateRouter><AddContactForm/></PrivateRouter>}></Route>

@@ -147,7 +147,7 @@ export default function Register() {
                        
            
                       
-             <LinkCustom to='/login'>Back to login</LinkCustom>
+             <LinkCustom to='/'>Back to login</LinkCustom>
           
                         </Box>
                     </Box>
