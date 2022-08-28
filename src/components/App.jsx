@@ -21,7 +21,7 @@ import Register from "pages/RegistrationForm/RegistrationForm";
 export const App = () => {
    const isLoggedIn = useSelector(state => state.authSlice.isLoggedIn);
    const token =  useSelector(state => state.authSlice.token) ;
-   const skip = token && token === null ? true : false;
+   // const skip = token && token === null ? true : false;
    
 //   {   skip}
    const { data, } = useFetchCurrentUserQuery( );

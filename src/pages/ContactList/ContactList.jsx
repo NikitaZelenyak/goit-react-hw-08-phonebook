@@ -11,10 +11,18 @@ import TextField from '@mui/material/TextField';
 
 
 
+
+
+
+
+
 export const ContactsList = ({isOpen,setIdContact}) => {
     const { data: contacts,   } = useGetContactsQuery();
 
     const [filter, setFilter] = useState('');
+
+
+
 
 
     const onFilterContacts = (e) => {
@@ -34,17 +42,19 @@ export const ContactsList = ({isOpen,setIdContact}) => {
 
         
     };
+ 
+
     
     const visibleContacts =  getVisibleContact(contacts)
    
 
-
+    
 
 
     return (
    
         <Wrapper>    
-
+ 
             <WrapInput>
                 <TextField id="find" type="text"
                     onChange={onFilterContacts} label="Find contacts by name" variant="outlined" />
