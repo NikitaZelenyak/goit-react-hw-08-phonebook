@@ -1,6 +1,6 @@
 
-
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { RiContactsBook2Fill } from 'react-icons/ri';
 import { IoIosPersonAdd } from 'react-icons/io';
 import { Link,HeaderStyled,Nav,Text,Btn,Wrapper,NameText } from './Header.styled';
@@ -12,10 +12,10 @@ import { useDispatch } from 'react-redux';
 
 
 
-export const Header = ({ data }) => {
+export const Header = ({ currentUser }) => {
 
     const [logout] = useLogOutMutation();
-const dispatch =useDispatch();
+    const dispatch = useDispatch();
 
    const handlerLog = () => {
       logout();
@@ -26,18 +26,18 @@ const dispatch =useDispatch();
         <Text>ContactsBook</Text>
         <Nav>
         <Link to='/contacts'><RiContactsBook2Fill size={24} /></Link>
-            <Link to='/create'><IoIosPersonAdd size={24} /></Link>
+        <Link to='/create'><IoIosPersonAdd size={24} /></Link>
 
               
             </Nav>
             <Wrapper>
-                <NameText>{ data && data.name}</NameText>
+                 <AccountCircleIcon sx={{ color: '#4886d6' }}/>
+                <NameText>Hello,{ currentUser && currentUser.name}</NameText>
                 <Btn type="button"
                     
               onClick={handlerLog}
                 >
-                    Logout
-               
+               <LogoutIcon/>
                 </Btn>
                  
             </Wrapper>

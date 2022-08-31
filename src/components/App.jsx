@@ -19,23 +19,30 @@ import Register from "pages/RegistrationForm/RegistrationForm";
 
 
 export const App = () => {
-   const isLoggedIn = useSelector(state => state.authSlice.isLoggedIn);
-   const token =  useSelector(state => state.authSlice.token) ;
-   // const skip = token && token === null ? true : false;
-   
-//   {   skip}
-   const { data, } = useFetchCurrentUserQuery( );
 
-
- const dispatch= useDispatch()
-   useEffect(() => {
-      token !== null && dispatch(fetchUser(data));
-      console.log(data);
-   }, [data, dispatch,  token]);
-
+     
    const [isOpen, seIisOpen] = useState(false);
-   const [idContact, setIdContact] = useState(" ");
- 
+   const [idContact, setIdContact] = useState(null);
+
+   const isLoggedIn = useSelector(state => state.authSlice.isLoggedIn);
+   // const token = useSelector(state => state.authSlice.token);
+
+
+   // const skip =  token === null ? true : false;
+
+//   {   skip}
+   const { data:currentUser,isFetching } = useFetchCurrentUserQuery( );
+
+   console.log(currentUser);
+   const dispatch = useDispatch()
+   
+   useEffect(() => {
+     currentUser && dispatch(fetchUser(currentUser));
+
+   }, [currentUser, dispatch,  ]);
+
+
+
 
    
 
@@ -45,23 +52,25 @@ export const App = () => {
    return (
 
       <Container >
-
-         {isLoggedIn &&  <Header data={data}></Header> }
+         {!isFetching &&  <>
+            { isLoggedIn && <Header currentUser={currentUser}></Header> }
               
    
  
-         {isOpen && <Modal idContact={idContact} onClose={seIisOpen}></Modal>}
+         {isOpen && <Modal idContact={idContact}  onClose={seIisOpen}></Modal>}
            
          <Routes>
             <Route path="/" element={<PublicRouter restricted><SignIn  /></PublicRouter>}></Route>
              <Route path="/register" element={<PublicRouter restricted><Register /></PublicRouter>}></Route>
-            <Route path="/contacts" element={<PrivateRouter><ContactsList isOpen={seIisOpen} setIdContact={setIdContact} /></PrivateRouter>}> </Route>
+            <Route path="/contacts" element={<PrivateRouter><ContactsList seIisOpen={seIisOpen} setIdContact={setIdContact}  /></PrivateRouter>}> </Route>
             <Route path='/create' element={<PrivateRouter><AddContactForm/></PrivateRouter>}></Route>
            
             
            
-         </Routes>
-           
+         </Routes> </>
+       
+           }
+        
 
      
            

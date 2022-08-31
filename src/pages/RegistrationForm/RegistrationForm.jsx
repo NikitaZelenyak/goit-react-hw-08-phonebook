@@ -120,7 +120,7 @@ export default function Register() {
                                 label="Name"
                                 name="name"
                                 autoComplete="name"
-                                autoFocus />
+                                />
                             <TextField
                                 margin="normal"
                                 required

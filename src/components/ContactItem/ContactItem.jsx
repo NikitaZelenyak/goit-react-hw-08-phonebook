@@ -21,17 +21,23 @@ import Button from '@mui/material/Button';
 
 
 
-export const ContactItem = ({ id,name,number,email,isOpen,setIdContact}) => {
 
+export const ContactItem = ({ id,name,number,seIisOpen,setIdContact}) => {
+
+
+ 
+  // const [updateContact, ] = useUpdateContactMutation();
 
 
     const [removeContact,{isLoading}] = useRemoveContactMutation();
 
-    const openModalById = (id) => {
-        isOpen(isOpen => !isOpen);
+  const openModalById = async (id) => {
 
-        setIdContact(id);
+    seIisOpen(isOpen => !isOpen);
+    setIdContact(id);
+
    }
+
 
 
 
@@ -66,7 +72,7 @@ export const ContactItem = ({ id,name,number,email,isOpen,setIdContact}) => {
       </Button>
       
                         <Button
-                             onClick={() => openModalById(id) }
+                             onClick={() => openModalById(id)}
                             variant="contained"
                             endIcon={<EditIcon />}>
        Edit

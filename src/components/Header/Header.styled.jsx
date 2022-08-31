@@ -55,22 +55,27 @@ margin-left: auto;
     background-color: transparent;
     cursor: pointer;
     border: none;
-    color:#f44c04 ;
+    color: #0444f4;
     padding: 10px;
     font-size: 20px;
     border-radius: 6px;
     &:hover{
-        color: white;
+        color: #ec3030;
         background-color:#0e58eb90 ;
     }
 ` 
 export const Wrapper = styled.div`
 display: flex;
-    margin-left: auto;
+align-items: center;
+   
 `
 export const NameText = styled.p`
     color: #0444f4;
     text-transform: capitalize;
+    margin: 0px;
     font-size: 20px;
+    margin-right: 20px;
+    margin-left: 5px;
+
 
 `

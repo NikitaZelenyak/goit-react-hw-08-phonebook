@@ -1,8 +1,8 @@
-import { Wrapper,List,WrapInput } from "./ContactList.styled"
+import { Wrapper,List,WrapInput,Link } from "./ContactList.styled"
 import { ContactItem } from "components/ContactItem/ContactItem";
 import { useState } from "react";
 
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useGetContactsQuery, } from "redux/contacts/contactsApi";
 
 import * as React from 'react';
@@ -16,7 +16,8 @@ import TextField from '@mui/material/TextField';
 
 
 
-export const ContactsList = ({isOpen,setIdContact}) => {
+
+export const ContactsList = ({seIisOpen,setIdContact,setContact}) => {
     const { data: contacts,   } = useGetContactsQuery();
 
     const [filter, setFilter] = useState('');
@@ -62,9 +63,9 @@ export const ContactsList = ({isOpen,setIdContact}) => {
            
          
        
-            <List>
-                {contacts && visibleContacts.map(contact => (<ContactItem key={contact.id} {...contact} isOpen={isOpen} setIdContact={setIdContact} />))}                  
-            </List>
+           
+                {contacts && contacts.length === 0 ? <Link to='/create'><AddCircleIcon/></Link> :  <List> {visibleContacts && visibleContacts.map(contact => (<ContactItem key={contact.id} {...contact} seIisOpen={seIisOpen} setIdContact={setIdContact} setContact={setContact} />))}</List> }                  
+            
         </Wrapper>
 )
 

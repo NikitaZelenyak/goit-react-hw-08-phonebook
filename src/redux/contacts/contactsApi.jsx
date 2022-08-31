@@ -26,10 +26,6 @@ export const contactsApi = createApi({
           query: () => `/contacts`,
           providesTags :['Contact'],
       }),
-         getContactsById: builder.query({
-             query: (id) => `/contacts/${id}`,
-          providesTags :['Contact'],
-      }),
         addContact: builder.mutation({
             query: (value) => ({
                 url: '/contacts',
@@ -47,10 +43,10 @@ export const contactsApi = createApi({
              invalidatesTags: ['Contact'],
         }),
         updateContact:builder.mutation({
-            query: (values) => ({
-                url: `/contacts/${values.id}`,
+            query: ({name,number,id}) => ({
+                url: `/contacts/${id}`,
                 method: 'PATCH',
-                body:values,
+                body:{name,number},
             }),
              invalidatesTags: ['Contact'],
         }),

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { NavLink } from "react-router-dom";
 export const Wrapper = styled.div`
 margin-left: auto;
 margin-right: auto;
@@ -20,4 +20,10 @@ export const List = styled.ul`
     gap: 10px;
 padding-bottom: 80px;
 
+`
+export const Link = styled(NavLink)`
+    color:  #0444f4;
+    display: inline-block;
+   margin-left: 50%;
+   margin-top: 20px;
 `

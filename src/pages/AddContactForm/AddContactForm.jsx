@@ -24,16 +24,17 @@ export const AddContactForm = () => {
     const [ addContact ] = useAddContactMutation();
     const { data: contacts,isFetching, } = useGetContactsQuery();
 
-    const getInfoContact = async ({ name, number, email, group }, action,) => {
+    const getInfoContact = async ({ name, number, email,  }, action,) => {
         try {
-            await addContact({ name, number, email, group });
-              
+           
             const checkOnIncludes = contacts.some(
             contact => contact.name.toLowerCase() === name.toLowerCase());     
       
             if (checkOnIncludes) {
             return toast.error(`This name: "${name}" already have in list`)
             };
+             await addContact({ name, number, email,  });
+              
                toast.success(`Contact added`)
              
         } catch (error) {
@@ -58,8 +59,6 @@ export const AddContactForm = () => {
                 {
                     name: '',
                     number: '',
-                //     email: '',
-                    group: "Other",
                 }}                   
                 validationSchema={schema}
                 onSubmit={getInfoContact}
