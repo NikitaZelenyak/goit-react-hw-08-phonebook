@@ -6,16 +6,21 @@ import { IoIosPersonAdd } from 'react-icons/io';
 import { Link,Nav,Btn,Wrapper,NameText } from './UserMenu.styled';
 import { logOutUser } from 'redux/auth/authSlice';
 import { useLogOutMutation } from 'redux/auth/authApi';
-import { useDispatch,useSelector } from 'react-redux';
-
+import { useDispatch, useSelector} from 'react-redux';
+import { useFetchCurrentUserQuery } from 'redux/auth/authApi';
 
 export const UserMenu = () => {
 
    
   const [logout] = useLogOutMutation();
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state.authSlice.user);
+ 
 
+   const token = useSelector(state => state.authSlice.token);
+   const skip = token === null ? true : false;
+   const { data:currentUser, } = useFetchCurrentUserQuery("",{skip} );
+
+  
    const handlerLog = () => {
       logout();
       dispatch(logOutUser())

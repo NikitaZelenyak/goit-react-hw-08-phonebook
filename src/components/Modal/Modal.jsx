@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ModalBox, Overlay,Title } from "./Modal.styled";
-import { useState } from 'react';
+
 
 
 
@@ -36,8 +36,6 @@ export const Modal = ({ idContact, onClose }) =>{
     }
     const contactById = getContactById(contacts, idContact);
 
-    const [name, setName] = useState(contactById.name);
-    const [number, setNumber] = useState(contactById.number);
 
 
     const [updateContact] = useUpdateContactMutation()
@@ -75,15 +73,15 @@ export const Modal = ({ idContact, onClose }) =>{
   
         event.preventDefault();
       
-      const nameValue =   event.target.elements.name.value;
-      const numberValue = event.target.elements.number.value ;
-        setName(nameValue);
-        setNumber(numberValue);
+      const name =   event.target.elements.name.value;
+      const number = event.target.elements.number.value ;
+       
         const contactData = {
             name,
             number,
             id: idContact,
-       }
+        }
+
         try {
            
            await updateContact(contactData);
@@ -128,7 +126,7 @@ export const Modal = ({ idContact, onClose }) =>{
                         onSubmit={handlerUpdate}
                         noValidate sx={{ mt: 1 }}>
                               <TextField
-                                  defaultValue={name}
+                                  defaultValue={contactById.name}
                             margin="normal"
                             required
                             fullWidth
@@ -139,7 +137,7 @@ export const Modal = ({ idContact, onClose }) =>{
                             autoFocus />
 
                               <TextField
-                                   defaultValue={number}
+                                   defaultValue={contactById.number}
                             margin="normal"
                             required
                             fullWidth

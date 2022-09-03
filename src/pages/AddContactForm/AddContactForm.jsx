@@ -75,7 +75,7 @@ const [ addContact ] = useAddContactMutation();
           <><Title> 
             Add contact info
         </Title>
-            <><Toaster></Toaster><ThemeProvider theme={theme}>
+            <><Toaster position="top-right"></Toaster><ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
