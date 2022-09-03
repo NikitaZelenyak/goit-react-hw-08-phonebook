@@ -39,7 +39,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function LogIn() {
 
      const [logIn,{status}] = useLogInMutation();
   const dispatch = useDispatch();

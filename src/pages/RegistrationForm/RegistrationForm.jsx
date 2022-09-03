@@ -3,7 +3,7 @@
 import { useRegisterMutation } from "redux/auth/authApi";
 import { useDispatch } from 'react-redux';
 import { registerUser } from 'redux/auth/authSlice';
-import { LinkCustom } from "./RegistrationForm.styled";
+
  
 
 
@@ -22,7 +22,6 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import { useState } from "react";
 
 
@@ -30,8 +29,7 @@ const theme = createTheme();
 
 export default function Register() {
     const [isCheckboxChecked, setICheckboxChecked] = useState(true)
-   
-
+  
     const dispatch = useDispatch();
     const [addUser,{status}] = useRegisterMutation();
 
@@ -48,23 +46,28 @@ export default function Register() {
       
     };
 
+    const handleSubmit = async (event) => {
+  event.preventDefault();
 
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    
+    
       const data = new FormData(event.currentTarget);
       const userData ={
-          email: data.get('email'),          
+          email: data.get('email'),
           password: data.get('password'),
           name: data.get('name'),
       }
 
-      
 
 
-      try {
+
+        try{
+            
+           
    
-          await addUser(userData).then(({data}) => dispatch(registerUser(data)));
+          await addUser({...userData}).then(({data}) => dispatch(registerUser(data)))
+        //   dispatch(registerUser(userData));
+          
         
       }
       catch (error) {
@@ -143,12 +146,7 @@ export default function Register() {
                             
                             >
                                 Sign In
-                        </Button>
-                       
-           
-                      
-             <LinkCustom to='/'>Back to login</LinkCustom>
-          
+                        </Button>         
                         </Box>
                     </Box>
                 </Container>

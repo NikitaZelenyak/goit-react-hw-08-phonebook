@@ -4,22 +4,10 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 
-export const HeaderStyled = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
-  margin-bottom: 16px;
-  border-bottom: 1px solid black;
 
-
-  > nav {
-    display: flex;
-  }
-`;
 
 export const Nav = styled.nav`
+ display: flex;
 margin-left: auto;
 margin-right: auto;
 `
@@ -43,11 +31,6 @@ export const Link = styled(NavLink)`
 `;
     
 
-export const Text = styled.p`
-font-size: 36px;
-  margin: 0;
-color: #0444f4;
-`
 
 export const Btn = styled.button`
 display: inline-block;
@@ -55,7 +38,7 @@ margin-left: auto;
     background-color: transparent;
     cursor: pointer;
     border: none;
-    color: #0444f4;
+    color: #093d9d;
     padding: 10px;
     font-size: 20px;
     border-radius: 6px;
@@ -70,7 +53,7 @@ align-items: center;
    
 `
 export const NameText = styled.p`
-    color: #0444f4;
+ color: #093d9d;
     text-transform: capitalize;
     margin: 0px;
     font-size: 20px;

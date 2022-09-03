@@ -55,7 +55,6 @@ export const authApi = createApi({
         fetchCurrentUser: builder.query({
             query: () => ({
                 url: `/users/current`,
-                // body: token,
                 providesTags: ['User'],
             })
             

@@ -24,8 +24,6 @@ export const ContactsList = ({seIisOpen,setIdContact,setContact}) => {
 
 
 
-
-
     const onFilterContacts = (e) => {
 
         const name = e.currentTarget.value

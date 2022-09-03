@@ -1,39 +1,59 @@
-import { React } from "react";
-import toast, { Toaster } from 'react-hot-toast';
- import { Formik,  Form,  } from 'formik';
-import { Wrapper,WrapBtn,Label,Input, Message, } from "./AddContactForm.styled";
-import * as yup from 'yup';
+
+import * as React from 'react';
 import { useAddContactMutation,useGetContactsQuery } from "redux/contacts/contactsApi";
-import { TailSpin } from  'react-loader-spinner'
-import Fab from '@mui/material/Fab';
+
+import { Title } from './AddContactForm.styled';
+
+
+
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import toast, { Toaster } from 'react-hot-toast';
+
+
+ 
 
 
 
 
-import AddIcon from '@mui/icons-material/Add';
 
 
 
 
+const theme = createTheme();
 
-let schema = yup.object().shape({
-    name: yup.string().required(),
-    number: yup.number().required(),
-})
-export const AddContactForm = () => {
-    const [ addContact ] = useAddContactMutation();
+export const  AddContactForm =() =>{
+
+
+const [ addContact ] = useAddContactMutation();
     const { data: contacts,isFetching, } = useGetContactsQuery();
 
-    const getInfoContact = async ({ name, number, email,  }, action,) => {
+   const  resetForm = (event) => {
+     
+       event.target.elements.number.value = '';
+       event.target.elements.name.value = '';
+   }
+
+    const getInfoContact = async (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const contactData = {
+          name: data.get('name'),
+          number: data.get('number'),
+      }
         try {
            
             const checkOnIncludes = contacts.some(
-            contact => contact.name.toLowerCase() === name.toLowerCase());     
+            contact => contact.name.toLowerCase() === contactData.name.toLowerCase());     
       
             if (checkOnIncludes) {
-            return toast.error(`This name: "${name}" already have in list`)
+            return toast.error(`This name: "${contactData.name}" already have in list`)
             };
-             await addContact({ name, number, email,  });
+             await addContact(contactData   );
               
                toast.success(`Contact added`)
              
@@ -41,62 +61,75 @@ export const AddContactForm = () => {
             
             toast.error(`${error}`)
         }
-
-      
-        action.resetForm();
-          
-     
+ 
+        resetForm(event);
+         
     }
+
+ 
+
 
 
     return (
       
-        <Wrapper>
-  
-            <div ><Toaster  position="top-right"     /></div>
-            <Formik
-                initialValues={
-                {
-                    name: '',
-                    number: '',
-                }}                   
-                validationSchema={schema}
-                onSubmit={getInfoContact}
-            >
-                <Form>                   
-                    <Label htmlFor="name">Enter the name</Label>                   
-                    <Input id="name" name="name" type="text"></Input>
-                    <Message component='div' name="name"></Message>                   
-                    <Label htmlFor="number">Enter the number</Label>
-                    <Input id="number" name="number" type="tel"></Input>
-                    <Message component='div' name="number"></Message>   
-                    <WrapBtn>                      
-                        <Fab
-                            color="primary"
-                            aria-label="add"                  
-                            type='submit'  >                      
-                            {isFetching ?                          
-                                <TailSpin                     
-                                    height="30"                        
-                                    width="30"                       
-                                    radius=""   
-                                    color='white' /> :
-                                <AddIcon />
-                          }                      
-                        </Fab>
-                    </WrapBtn>
-                   
-                 
-                    
-     
-     
-      
+          <><Title> 
+            Add contact info
+        </Title>
+            <><Toaster></Toaster><ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}
+                >
 
-                </Form>              
-            </Formik>
-                </Wrapper>
 
-        )
-    }
+
+                    <Box component="form"
+                        onSubmit={getInfoContact}
+                        noValidate sx={{ mt: 1 }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="name"
+                            label="Name"
+                            name="name"
+                            autoComplete="name"
+                            autoFocus />
+
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="number"
+                            label="Number"
+                            type="number"
+                            id="number" />
+
+                        <Button
+                            disabled={isFetching}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Add
+                        </Button>
+
+
+
+                    </Box>
+                </Box>
+
+            </Container>
+        </ThemeProvider></></>
+  );
+}
+
 
 
