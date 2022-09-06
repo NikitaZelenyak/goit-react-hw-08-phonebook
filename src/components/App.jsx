@@ -27,9 +27,9 @@ export const App = () => {
    const [idContact, setIdContact] = useState(null);
 
    const token = useSelector(state => state.authSlice.token);
-   const skip = token === null ? true : false;
+   // const skip = token === null ? true : false;
 
-   const { data:currentUser,isFetching } = useFetchCurrentUserQuery("",{skip} );
+   const { data:currentUser,isFetching } = useFetchCurrentUserQuery();
 
    const dispatch = useDispatch()
    
